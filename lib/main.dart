@@ -19,11 +19,11 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
 
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.purple),
-        appBarTheme: AppBarTheme(
+        appBarTheme: const AppBarTheme(
           backgroundColor: Colors.purple,
         )
       ),
-      home: Loginpage()
+      home: const Loginpage()
     );
   }
 }

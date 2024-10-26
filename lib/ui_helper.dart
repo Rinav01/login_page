@@ -23,6 +23,15 @@ class UiHelper{
     }, style: ElevatedButton.styleFrom(shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.circular(25)
     ),backgroundColor: Theme.of(context).colorScheme.primary),
-        child: Text(text,style: TextStyle(color: Colors.black,fontSize: 20),)));
+        child: Text(text,style: const TextStyle(color: Colors.black,fontSize: 20),)));
   }
+
+  static customAlertDialog(BuildContext context , String text){
+    return showDialog(context: context, builder: (BuildContext context){
+      return AlertDialog(
+        title: Text(text),
+      );
+    });
+  }
+
 }

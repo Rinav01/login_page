@@ -1,4 +1,5 @@
-import 'package:firebase_backend/uihelper.dart';
+import 'package:firebase_backend/signup_page.dart';
+import 'package:firebase_backend/ui_helper.dart';
 import 'package:flutter/material.dart';
 
 class Loginpage extends StatefulWidget {
@@ -31,7 +32,9 @@ class _LoginpageState extends State<Loginpage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const Text("Already have an account ? ",style: TextStyle(fontSize: 16),),
-              TextButton(onPressed: () {}, child: const Text("Sign Up",style: TextStyle(fontWeight: FontWeight.bold),))
+              TextButton(onPressed: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context)=>const SignupPage()));
+              }, child: const Text("Sign Up",style: TextStyle(fontWeight: FontWeight.bold),))
             ],
           )
         ],
