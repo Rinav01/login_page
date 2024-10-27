@@ -25,9 +25,9 @@ class _SignupPageState extends State<SignupPage> {
         );
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => MyHomePage(title: "Home Page")),
+          MaterialPageRoute(builder: (context) => const MyHomePage(title: "Home Page")),
         );
-      } on FirebaseAuthException  catch (e) {
+      } on FirebaseAuthException  {
         UiHelper.customAlertDialog(context, "An unexpected error occurred");
       }
     }

@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_backend/forgot_password.dart';
 import 'package:firebase_backend/main.dart';
 import 'package:firebase_backend/signup_page.dart';
 import 'package:firebase_backend/ui_helper.dart';
@@ -23,7 +24,8 @@ class _LoginpageState extends State<Loginpage> {
       UserCredential ? usercredential;
       try{
         usercredential = await FirebaseAuth.instance.signInWithEmailAndPassword(email: email, password: password).then((value){
-          Navigator.push(context, MaterialPageRoute(builder: (context)=>MyHomePage(title: "Login")));
+          Navigator.push(context, MaterialPageRoute(builder: (context)=>const MyHomePage(title: "Login")));
+          return null;
         });
       }
       on FirebaseAuthException catch(e){
@@ -57,7 +59,11 @@ class _LoginpageState extends State<Loginpage> {
                 Navigator.push(context, MaterialPageRoute(builder: (context)=>const SignupPage()));
               }, child: const Text("Sign Up",style: TextStyle(fontWeight: FontWeight.bold),))
             ],
-          )
+          ),
+          const SizedBox(height:2,),
+          TextButton(onPressed: (){
+            Navigator.push(context, MaterialPageRoute(builder: (context)=>ForgotPassword()));
+          }, child: const Text("Forgot Password ?? ",style: TextStyle(fontSize: 20),))
         ],
       ),
     );
