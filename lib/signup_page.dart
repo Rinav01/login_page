@@ -14,20 +14,21 @@ class _SignupPageState extends State<SignupPage> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
-  signUp(String email, String password)async{
-    if(email==""&& password ==""){
+  signUp(String email, String password) async {
+    if (email.isEmpty || password.isEmpty) {
       UiHelper.customAlertDialog(context, "Enter Required Data");
-    }
-    else{
-      UserCredential? usercredential;
-      try{
-        usercredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(email: email, password: password).then((value){
-          Navigator.push(context, MaterialPageRoute(builder: (context)=>const MyHomePage(title: "Home Page")));
-          return null;
-        });
-      }
-      on FirebaseAuthException catch(ex){
-        return UiHelper.customAlertDialog(context, ex.code.toString());
+    } else {
+      try {
+        await FirebaseAuth.instance.createUserWithEmailAndPassword(
+          email: email,
+          password: password,
+        );
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => MyHomePage(title: "Home Page")),
+        );
+      } on FirebaseAuthException  catch (e) {
+        UiHelper.customAlertDialog(context, "An unexpected error occurred");
       }
     }
   }
@@ -42,14 +43,14 @@ class _SignupPageState extends State<SignupPage> {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          UiHelper.customTextField(emailController,"Email",Icons.mail,false),
-          const SizedBox(height: 16,),
+          UiHelper.customTextField(emailController, "Email", Icons.mail, false),
+          const SizedBox(height: 16),
           UiHelper.customTextField(passwordController, "Password", Icons.password, true),
-          const SizedBox(height: 30,),
+          const SizedBox(height: 30),
           UiHelper.customButton(() {
-            signUp(emailController.text.toString(), passwordController.text.toString());
-          }, "Sign Up",context),
-          const SizedBox(height: 16,),
+            signUp(emailController.text.trim(), passwordController.text.trim());
+          }, "Sign Up", context),
+          const SizedBox(height: 16),
         ],
       ),
     );
